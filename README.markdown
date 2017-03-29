@@ -1,7 +1,8 @@
-# zlogger
---
-    import "github.com/payleet/zlogger"
+# zlogger  [![GoDoc](https://godoc.org/github.com/payleet/zlogger?status.svg)](https://godoc.org/github.com/payleet/zlogger)
 
+```go
+    import "github.com/payleet/zlogger"
+```
 
 ## Usage
 
@@ -72,6 +73,7 @@ func NewLogger() *Logger
 NewLogger Returns Logger
 
 #### func (*Logger) DPanic
+
 
 ```go
 func (l *Logger) DPanic(message string, val ...interface{})
