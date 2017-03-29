@@ -83,6 +83,13 @@ func (l *Logger) WithField(key string, value interface{}) *Logger {
 	}
 }
 
+// WithFields returns Logger with Filed key set to value
+func (l *Logger) WithFields(f Fileds) *Logger {
+	return &Logger{
+		logger: l.logger.WithOptions(zap.Fields(fieldsToZapFields(f)...)),
+	}
+}
+
 // Error logs at error level
 func (l *Logger) Error(message string, val ...interface{}) {
 	l.logger.Error(message, valuesToZapFields(val)...)
@@ -130,6 +137,15 @@ func valuesToZapFields(values ...interface{}) []zapcore.Field {
 	}
 
 	return fields
+}
+
+func fieldsToZapFields(f Fileds) []zapcore.Field {
+	zf := []zapcore.Field{}
+
+	for k, v := range f {
+		zf = append(zf, keyValeToZapfield(k, v))
+	}
+	return zf
 }
 
 func keyValeToZapfield(key string, val interface{}) zapcore.Field {
